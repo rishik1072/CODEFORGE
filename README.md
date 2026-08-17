@@ -1,6 +1,4 @@
-Absolutely 👍 I cleaned up the Git merge-conflict markers, removed the duplicated sections, fixed the formatting, and combined the strongest parts into **one clean GitHub-ready `README.md`**. The content is based on your uploaded CodeForge README. 
 
-**Copy everything below directly into `README.md`:**
 
 ````markdown
 # ⚡ CodeForge
