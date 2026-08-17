@@ -1,0 +1,14 @@
+{
+  "name": "@codeforge/cli",
+  "version": "1.0.0",
+  "description": "Official CLI for CodeForge secure code compilation platform",
+  "bin": {
+    "codeforge": "./bin/codeforge.js"
+  },
+  "scripts": {
+    "start": "node ./bin/codeforge.js"
+  },
+  "keywords": ["codeforge", "cli", "compiler", "c", "cpp", "rust", "sandbox"],
+  "author": "CodeForge Team",
+  "license": "MIT"
+}

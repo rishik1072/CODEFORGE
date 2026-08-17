@@ -1,0 +1,44 @@
+# Self-hosting entry point for CodeForge (Next.js app + PostgreSQL).
+#
+# NOT exercised by the managed sandbox this project was developed and
+# validated in - that platform runs the app and a PostgreSQL instance
+# directly. This file is provided for anyone deploying CodeForge on their
+# own infrastructure per the project brief's "docker compose up --build"
+# requirement.
+#
+# Usage:
+#   docker compose up --build
+#   -> app on http://localhost:3000, Postgres on localhost:5432
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - codeforge_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/app_db
+    ports:
+      - "3000:3000"
+
+volumes:
+  codeforge_db_data:
